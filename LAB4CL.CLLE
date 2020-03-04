@@ -1,0 +1,89 @@
+/**************************************************************/                                    
+/* LAB4CL                                                   */                                      
+/* Coded by: Melody Mastache                                  */                                    
+/**************************************************************/                                    
+             PGM                                                                                    
+             DCLF       LAB4DSP                                                                     
+             DCL        &NUM *CHAR 6                                                                
+             DCL        &RTNUSRPRF *CHAR 10                                                         
+             DCL        &DATE *CHAR 8                                                               
+             DCL        &TIME *CHAR 8                                                               
+             DCL        &MSGQLIB *CHAR 10                                                           
+             DCL        &MSGQ *CHAR 10                                                              
+             DCL        &SYSLVL *CHAR 9                                                             
+             DCL        &PRVSIGN *CHAR 13                                                           
+             SNDRCVF                                                                                
+             DOWHILE    (&IN03 = '0')                                                               
+                IF         (&IN21 = '1') DO                                                         
+                   CALL       QUSCMDLN                                                              
+                ENDDO                                                                               
+                ELSE       DO                                                                       
+                SELECT                                                                              
+                   WHEN       (&OPTION = '1' *OR &OPTION = '01') CALLSUBR OPTION1                   
+                   WHEN       (&OPTION = '2' *OR &OPTION = '02') CALLSUBR OPTION2                   
+                   WHEN       (&OPTION = '3' *OR &OPTION = '03') CALLSUBR OPTION3                   
+                   WHEN       (&OPTION = '4' *OR &OPTION = '04') CALLSUBR OPTION4                   
+                   WHEN       (&OPTION = '5' *OR &OPTION = '05') CALLSUBR OPTION5                   
+                   OTHERWISE  CALLSUBR OUTOFRANGE                                                   
+                ENDSELECT                                                                           
+                SNDRCVF                                                                             
+                CALLSUBR   CLEAR                                                                    
+             ENDDO                                                                                  
+             ENDDO                                                                                  
+/***********************SUBROUTINES*********************/                                           
+             SUBR       OPTION1                                                                     
+                RTVUSRPRF  MSGQ(&MSGQ) MSGQLIB(&MSGQLIB)                                            
+                CHGVAR     &MSGTXT1 ('Signed on Users message queue is ' *BCAT &MSGQLIB *TCAT +     
+                             '/' *CAT &MSGQ)                                                        
+                CHGVAR     &MSGTXT2 ('CLLE Programs can report on and manage the users on the +     
+                             system')                                                               
+                CHGVAR     &IN30 '1'                                                                
+             ENDSUBR                                                                                
+                                                                                                    
+             SUBR       OPTION2                                                                     
+                CALL       INCOMERPG                                                                
+                CHGVAR     &MSGTXT1 ('The Student Version of the Tax RPGLE program was run')        
+                CHGVAR     &MSGTXT2 ('CLLE Programs can manage how an RPGLE Business +              
+                             Application is run')                                                   
+                CHGVAR     &IN30 '1'                                                                
+             ENDSUBR                                                                                
+                                                                                                    
+             SUBR       OPTION3                                                                     
+                RTVSYSVAL  SYSVAL(QMAXSIGN) RTNVAR(&NUM)                                            
+                CHGVAR     &MSGTXT1 ('Maximum invalid signons allowed: ' *BCAT (&NUM) *TCAT +       
+                             '(tries)')                                                             
+                CHGVAR     &MSGTXT2 ('CLLE Programs can report on the system and manage system +    
+                             wide settings')                                                        
+                CHGVAR     &IN30 '1'                                                                
+             ENDSUBR                                                                                
+                                                                                                    
+             SUBR       OPTION4                                                                     
+                RTVUSRPRF  RTNUSRPRF(&RTNUSRPRF) PRVSIGN(&PRVSIGN)                                  
+                CHGVAR     &DATE (%SST(&PRVSIGN 4 2) *CAT '/' *CAT %SST(&PRVSIGN 6 2) *CAT '/' +    
+                             *CAT %SST(&PRVSIGN 2 2))                                               
+                CHGVAR     &TIME (%SST(&PRVSIGN 8 2) *CAT ':' *CAT %SST(&PRVSIGN 10 2) *CAT +       
+                             ':' *CAT %SST(&PRVSIGN 12 2))                                          
+                CHGVAR     &MSGTXT1 ('Previous sign on for user ' *BCAT &RTNUSRPRF *BCAT 'was +     
+                             on ' *CAT &DATE *BCAT &TIME)                                           
+                CHGVAR     &MSGTXT2 ('CLLE Programs can report on and manage the users in the +     
+                             system')                                                               
+                CHGVAR     &IN30 '1'                                                                
+             ENDSUBR                                                                                
+                                                                                                    
+             SUBR       OPTION5                                                                     
+                RTVOBJD    OBJ(QSYS/QCMD) OBJTYPE(*PGM) SYSLVL(&SYSLVL)                             
+                CHGVAR     &MSGTXT1 ('The system level of the operating system is ' *CAT +          
+                             &SYSLVL)                                                               
+                CHGVAR     &MSGTXT2 ('CLLE Programs can report on system information')              
+                CHGVAR     &IN30 '1'                                                                
+             ENDSUBR                                                                                
+                                                                                                    
+             SUBR       OUTOFRANGE                                                                  
+                CHGVAR     &IN60 '0'                                                                
+             ENDSUBR                                                                                
+                                                                                                    
+             SUBR       CLEAR                                                                       
+                CHGVAR     &IN30 '0'                                                                
+                CHGVAR     &IN60 '0'                                                                
+             ENDSUBR                                                                                
+             ENDPGM                                                                                  
