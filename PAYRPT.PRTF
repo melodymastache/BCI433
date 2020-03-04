@@ -1,0 +1,49 @@
+     A          R TITLE
+     A                                  1  2DATE(*YY)
+     A                                      EDTCDE(Y)
+     A                                  1 15TIME
+     A                                  2  2'Name: Citlalli Melody Mastache'
+     A                                  1 97PAGNBR
+     A                                  1 44'Weekly Payroll Report'
+     A                                  1 91'Page:'
+     A          R COLHDG                    SPACEB(1)
+     A                                      SPACEA(1)
+     A                                     1'|Employee ID|'
+     A                                      SPACEB(1)
+     A                                    14'|Work Shift|'
+     A                                    26'|Pay Grade|'
+     A                                    37'|Hourly Rate|'
+     A                                    50'|Hours Worked|'
+     A                                    64'|Regular Pay|'
+     A                                    77'|Overtime Pay|'
+     A                                    91'|Total Pay|'
+     A          R EMPDETAIL
+     A            EMPNUM    R    9S 0      1REFFLD(SHIFTWEEK/EMPNUM SENECAPAY/S-
+     A                                      HIFTWEEK)
+     A                                      EDTWRD('0   -   -   -')
+     A            WORKSHIFT R    1A       24REFFLD(SHIFTWEEK/WORKSHIFT +
+     A                                      SENECAPAY/SHIFTWEEK)
+     A            PAYGRADE  R             35REFFLD(SHIFTWEEK/PAYGRADE +
+     A                                      SENECAPAY/SHIFTWEEK)
+     A            HOURLYRATE     5  2     43EDTCDE(2)
+     A            HRSWORKED R             60REFFLD(SHIFTWEEK/HRSWORKED +
+     A                                      SENECAPAY/SHIFTWEEK)
+     A                                      EDTCDE(2)
+     A            REGULARPAY     7  2     67EDTCDE(2)
+     A            OVERPAY        7  2     81EDTCDE(2)
+     A            WEEKLYPAY      7  2     92EDTCDE(2)
+     A          R TOTALS                    SPACEB(2)
+     A                                    47'Totals:'
+     A            TOTREGPAY      9  2     56EDTCDE(1 $)
+     A            TOTOVTPAY      9  2     72EDTCDE(1 $)
+     A            TOTWKPAY       9  2     88EDTCDE(1 $)
+     A                                      SPACEA(8)
+     A*%%RS+<record-sequences>
+     A*%%RS+ <sequence name="REPORT1">
+     A*%%RS+  <device type="printer" width="132" height="66" />
+     A*%%RS+  <record-write record-format="TITLE" />
+     A*%%RS+  <record-write record-format="COLHDG" />
+     A*%%RS+  <record-write record-format="EMPDETAIL" />
+     A*%%RS+  <record-write record-format="TOTALS" />
+     A*%%RS+ </sequence>
+     A*%%RS </record-sequences> 
