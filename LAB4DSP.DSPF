@@ -1,0 +1,28 @@
+     A          R RECORD1                   CF03(03 'Exit Program')                                 
+     A                                      CF12(12 'Command Line')                                 
+     A                                      CF21(21)                                                
+     A                                  1 38'LAB 4'                                                 
+     A                                  5  3'Please select one of the following-                    
+     A                                       options:'                                              
+     A                                  9 14'3.  Maximum Invalid Signon Attempt-                    
+     A                                      s allowed'                                              
+     A                                 11 14'5.  Operating system level'                            
+     A                                  7 14'1.  Signed on User''s Message Queu-                    
+     A                                      e'                                                      
+     A                                 13 11'Option:'                                               
+     A                                 23  4'F3 - Exit'                                             
+     A                                 23 17'F21 - Command Line'                                    
+     A                                  1  3'CITLALLI MELODY MASTACHE'                              
+     A                                 10 14'4.  Previous sign on by signed on -                    
+     A                                      user'                                                   
+     A                                  8 14'2.  Run Income Tax Application'                        
+     A                                  2  3USER                                                    
+     A            OPTION         2A  B 13 20VALUES('1' '2' '3' '4' '5' '01' '02' +                  
+     A                                      '03' '04' '05')                                         
+     A  30                                  DSPATR(PC)                                              
+     A  60                                  DSPATR(RI)                                              
+     A  60                             13 35'Numbers from 1-5 only'                                 
+     A                                  1 71DATE                                                    
+     A                                  2 70TIME                                                    
+     A            MSGTXT1       70   O 16  4                                                        
+     A            MSGTXT2       70   O 19  4                                                         
