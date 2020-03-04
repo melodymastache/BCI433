@@ -1,0 +1,40 @@
+     A          R GETINCOME                 CF03(03 'Exit Program')                                 
+     A                                  2 71DATE                                                    
+     A                                 11 69USER                                                    
+     A                                  2 28'I N C O M E  T A X E S'                                
+     A                                  4  4'Income:'                                               
+     A            INCOMEAMT      8Y 0B  4 13EDTCDE(2)                                               
+     A  60                                  DSPATR(PR)                                              
+     A  98                                  DSPATR(PC)                                              
+     A  98                              4 27'Zero Income Amount'                                    
+     A                                  5  4'Married?'                                              
+     A            MARRIED        1   B  5 13VALUES('Y' 'N')                                         
+     A  60                                  DSPATR(PR)                                              
+     A  97                                  DSPATR(PC)                                              
+     A                                  5 16'Y/N'                                                   
+     A  97                              5 27'Blank Marital Status'                                  
+     A                                  7 20'A L L O W A B L E   D E D U C T I -                    
+     A                                      O N S'                                                  
+     A                                  9  3'Student Expenses:'                                     
+     A            EXPENSES       7Y 0B  9 27EDTCDE(2)                                               
+     A  60                                  DSPATR(PR)                                              
+     A                                 10  3'Charitable Donations:'                                 
+     A            DONATIONS      7Y 0B 10 27EDTCDE(2)                                               
+     A  60                                  DSPATR(PR)                                              
+     A                                 12 53'CITLALLI MELODY MASTACHE'                              
+     A          R YOURTAX                   CF03(03 'Exit Program')                                 
+     A                                      OVERLAY                                                 
+     A            DEDUCTIONS     9Y 0O 16 31EDTCDE(2)                                               
+     A                                 16  5'Deductions Allowed: '                                  
+     A                                 17  5'Adjusted Income Amount: '                              
+     A                                 18  5'Tax Rate:'                                             
+     A                                 19  5'Taxes Owing: '                                         
+     A                                 21 23'Your Taxes Are Due In '                                
+     A            DAYSTOPAY      3Y 0O 21 46EDTCDE(2)                                               
+     A            AINCOMEAMT     9Y 0O 17 31EDTCDE(2)                                               
+     A            TAXRATE        4  2O 18 31EDTCDE(2)                                               
+     A            TAXOWE         9Y 0O 19 31EDTCDE(2)                                               
+     A                                 21 51'Days'                                                  
+     A                                 23  4'F3 - Exit'                                             
+     A                                 22 67USER                                                    
+     A                                 23 51'CITLALLI MELODY MASTACHE'                               
