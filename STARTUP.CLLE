@@ -1,0 +1,11 @@
+/**************************************************************/                                    
+/* STARTUP ... run strjob, add lib, display sys lvl to screen */                                    
+/* ... display error message to log                           */                                    
+/* Coded by: Melody Mastache                                  */                                    
+/**************************************************************/                                    
+             PGM                                                                                    
+             CALL       STRJOB                                                                      
+             ADDLIBLE   SENECAPAY                                                                   
+             DSPSYSLVL  *DISPLAY                                                                    
+             MONMSG     CPF2103                                                                     
+             ENDPGM                                                                                  
